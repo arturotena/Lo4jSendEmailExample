@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//LOGGER" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration>
+    <!-- See http://wiki.apache.org/logging-log4j/Log4jXmlFormat
+    and https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html -->
+
+    <appender name="Email" class="org.apache.log4j.net.SMTPAppender"> 
+        <param name="BufferSize" value="10" /> 
+        <param name="SMTPHost" value="smtpserver" /> <!-- X -->
+        <param name="From" value="address@address.com" />  <!-- X -->
+        <param name="To" value="address@address.com" />  <!-- X -->
+        <param name="Subject" value="subject" />  <!-- X -->
+        <layout class="org.apache.log4j.PatternLayout"> 
+            <param name="ConversionPattern" value="%d{ISO8601} %-5p [%t] %c %X - %m%n" /> 
+        </layout> 
+        <filter class="org.apache.log4j.varia.LevelRangeFilter"> 
+            <param name="LevelMin" value="ERROR" /> 
+            <param name="LevelMax" value="FATAL" /> 
+        </filter> 
+    </appender> 
+
+    <logger name="com.arturotena" additivity="false">
+        <appender-ref ref="Email" /> 
+    </logger>
+
+</log4j:configuration>
